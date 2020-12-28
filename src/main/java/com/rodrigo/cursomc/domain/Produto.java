@@ -2,8 +2,11 @@ package com.rodrigo.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -33,6 +37,9 @@ public class Produto implements Serializable{
 	)
 	private List<Categoria> categorias =  new ArrayList<>(); 
 	
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itens = new HashSet<>(); 
+	
 	public Produto() {
 		
 	}
@@ -42,6 +49,14 @@ public class Produto implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+	}
+	
+	public List<Pedido> getPedidos(){
+		List<Pedido>  lista = new ArrayList<>(); 
+		for(ItemPedido item: this.itens) {
+			lista.add(item.getPedido()); 
+		}
+		return lista; 
 	}
 
 	public Integer getId() {
@@ -70,6 +85,14 @@ public class Produto implements Serializable{
 
 	public List<Categoria> getCategorias() {
 		return categorias;
+	}
+
+	public Set<ItemPedido> getItemPedido() {
+		return itens;
+	}
+
+	public void setItemPedido(Set<ItemPedido> itemPedido) {
+		this.itens = itemPedido;
 	}
 
 	public void setCategorias(List<Categoria> categorias) {
