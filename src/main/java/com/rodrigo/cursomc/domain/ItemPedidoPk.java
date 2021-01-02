@@ -6,6 +6,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /*ItemPedidoPk - Classe auxiliar para representar
  * uma chave composta. 
  * */
@@ -27,6 +29,7 @@ public class ItemPedidoPk implements Serializable{
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+	
 	public Produto getProduto() {
 		return produto;
 	}

@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Pedido implements Serializable{
 	
@@ -84,6 +86,7 @@ public class Pedido implements Serializable{
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
+
 	public Set<ItemPedido> getItemPedido() {
 		return itemPedido;
 	}
@@ -126,7 +129,6 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 	
 	
