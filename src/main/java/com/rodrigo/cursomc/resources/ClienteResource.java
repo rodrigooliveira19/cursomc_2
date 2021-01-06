@@ -1,6 +1,6 @@
 package com.rodrigo.cursomc.resources;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rodrigo.cursomc.domain.Cliente;
 import com.rodrigo.cursomc.domain.Cliente;
 import com.rodrigo.cursomc.dto.ClienteDTO;
 import com.rodrigo.cursomc.services.ClienteService;
