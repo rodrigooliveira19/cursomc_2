@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.rodrigo.cursomc.services.validation.ClienteInsert;
 
-@ClienteInsert//Anotação que valida o campo cpfOuCnpj
+@ClienteInsert//Anotação que valida o campo cpfOuCnpj/email
 public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
