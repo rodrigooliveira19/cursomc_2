@@ -11,10 +11,14 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.rodrigo.cursomc.domain.enums.EstadoPagamento;
 
+/*@JsonTypeInfo - permitir a instanciação de subclasses a partir de dados JSON
+ * */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)// Gerar tabelas separadas com as subclasses.
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

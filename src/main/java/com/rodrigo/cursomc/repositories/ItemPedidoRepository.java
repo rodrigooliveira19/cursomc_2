@@ -8,4 +8,6 @@ import com.rodrigo.cursomc.domain.ItemPedido;
 @Repository
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>{
 
+	//@Transactional(readOnly = true)
+	//List<ItemPedido> findByProdutoId(Integer id);
 }

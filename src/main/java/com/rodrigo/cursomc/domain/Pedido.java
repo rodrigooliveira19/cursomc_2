@@ -1,9 +1,9 @@
 package com.rodrigo.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,8 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Pedido implements Serializable{
@@ -40,7 +38,7 @@ public class Pedido implements Serializable{
 	private Pagamento pagamento; 
 	
 	@OneToMany(mappedBy = "id.pedido")
-	private Set<ItemPedido> itemPedido = new HashSet<>(); 
+	private List<ItemPedido> itens = new ArrayList<>(); 
 	
 	public Pedido() {
 		
@@ -56,7 +54,7 @@ public class Pedido implements Serializable{
 	
 	public double getValorTotal() {
 		double soma = 0.0; 
-		for(ItemPedido ip: itemPedido) {
+		for(ItemPedido ip: itens) {
 			soma += ip.getSubTotal(); 
 		}
 		return soma; 
@@ -95,12 +93,20 @@ public class Pedido implements Serializable{
 	}
 
 
-	public Set<ItemPedido> getItemPedido() {
-		return itemPedido;
+	public List<ItemPedido> getItens() {
+		return itens;
 	}
 
-	public void setItemPedido(Set<ItemPedido> itemPedido) {
-		this.itemPedido = itemPedido;
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
+	}
+	
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
 	}
 
 	@Override
@@ -109,16 +115,6 @@ public class Pedido implements Serializable{
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
-	}
-	
-	
-
-	public Pagamento getPagamento() {
-		return pagamento;
-	}
-
-	public void setPagamento(Pagamento pagamento) {
-		this.pagamento = pagamento;
 	}
 
 	@Override
@@ -137,7 +133,6 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 	
 }

@@ -29,7 +29,7 @@ public class ProdutoResource {
 		return ResponseEntity.ok().body(obj); 
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<ProdutoDTO>> findPage(
 			@RequestParam(value="nome",defaultValue = "0")String nome, 
 			@RequestParam(value="categorias",defaultValue = "0")String categorias, 
