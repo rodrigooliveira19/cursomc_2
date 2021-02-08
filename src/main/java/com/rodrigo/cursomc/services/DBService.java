@@ -52,6 +52,7 @@ public class DBService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository; 
 	
+	
 	public void instatiateTestDatabase() throws ParseException {
 		
 		Produto p4 = new Produto(null, "Mesa de escritório", 300.00);
