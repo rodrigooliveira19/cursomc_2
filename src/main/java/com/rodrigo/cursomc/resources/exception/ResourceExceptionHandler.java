@@ -2,6 +2,7 @@ package com.rodrigo.cursomc.resources.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.rodrigo.cursomc.exception.AuthorizationException;
 import com.rodrigo.cursomc.exception.DataIntegrityException;
 import com.rodrigo.cursomc.exception.ObjectNotFoundException;
 
@@ -38,6 +40,14 @@ public class ResourceExceptionHandler {
 		for(FieldError fieldError: ex.getBindingResult().getFieldErrors())
 			err.addError(fieldError.getField(), fieldError.getDefaultMessage());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err); 
+	}
+	
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<StandardError> authorization(AuthorizationException ex, HttpServletRequest request){
+		
+		//FORBIDDEN - código para acesso negado.
+		StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), ex.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err); 
 	}
 
 }
