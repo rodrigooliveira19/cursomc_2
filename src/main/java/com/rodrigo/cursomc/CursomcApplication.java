@@ -31,6 +31,7 @@ import com.rodrigo.cursomc.repositories.ItemPedidoRepository;
 import com.rodrigo.cursomc.repositories.PagamentoRepository;
 import com.rodrigo.cursomc.repositories.PedidoRepository;
 import com.rodrigo.cursomc.repositories.ProdutoRepository;
+import com.rodrigo.cursomc.services.S3Service;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner{
@@ -53,6 +54,8 @@ public class CursomcApplication implements CommandLineRunner{
 	private PagamentoRepository pagamentoRepository; 
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository; 
+	@Autowired
+	private S3Service s3Service; 
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -169,6 +172,9 @@ public class CursomcApplication implements CommandLineRunner{
 		p3.getItemPedido().addAll(Arrays.asList(ip2)); 
 		
 		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2,ip3)); */
+		
+		
+		s3Service.uploadFile("/home/rodrigo/Downloads/programador_prazos.jpeg");
 		
 	}
 
