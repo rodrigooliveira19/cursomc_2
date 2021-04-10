@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private Environment env; 
 	
+	//** - Tudo a partir da url informada. 
 	private static final String[] PUBLIC_MATCHERS = {
 			"/h2-console/**", 
 	}; 
@@ -47,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}; 
 	
 	private static final String[] PUBLIC_MATCHERS_POST = {
-			"/clientes/**",
+			"/clientes",
+			"/clientes/picture",
 			"/auth/forgot/**",
 	};
 	

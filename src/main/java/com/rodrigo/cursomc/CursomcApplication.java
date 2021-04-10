@@ -1,27 +1,11 @@
 package com.rodrigo.cursomc;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.rodrigo.cursomc.domain.Categoria;
-import com.rodrigo.cursomc.domain.Cidade;
-import com.rodrigo.cursomc.domain.Cliente;
-import com.rodrigo.cursomc.domain.Endereco;
-import com.rodrigo.cursomc.domain.Estado;
-import com.rodrigo.cursomc.domain.ItemPedido;
-import com.rodrigo.cursomc.domain.Pagamento;
-import com.rodrigo.cursomc.domain.PagamentoComBoleto;
-import com.rodrigo.cursomc.domain.PagamentoComCartao;
-import com.rodrigo.cursomc.domain.Pedido;
-import com.rodrigo.cursomc.domain.Produto;
-import com.rodrigo.cursomc.domain.enums.EstadoPagamento;
-import com.rodrigo.cursomc.domain.enums.TipoCliente;
 import com.rodrigo.cursomc.repositories.CategoriaRepository;
 import com.rodrigo.cursomc.repositories.CidadeRepository;
 import com.rodrigo.cursomc.repositories.ClienteRepository;
@@ -31,7 +15,6 @@ import com.rodrigo.cursomc.repositories.ItemPedidoRepository;
 import com.rodrigo.cursomc.repositories.PagamentoRepository;
 import com.rodrigo.cursomc.repositories.PedidoRepository;
 import com.rodrigo.cursomc.repositories.ProdutoRepository;
-import com.rodrigo.cursomc.services.S3Service;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner{
@@ -54,8 +37,7 @@ public class CursomcApplication implements CommandLineRunner{
 	private PagamentoRepository pagamentoRepository; 
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository; 
-	@Autowired
-	private S3Service s3Service; 
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -172,9 +154,7 @@ public class CursomcApplication implements CommandLineRunner{
 		p3.getItemPedido().addAll(Arrays.asList(ip2)); 
 		
 		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2,ip3)); */
-		
-		
-		s3Service.uploadFile("/home/rodrigo/Downloads/programador_prazos.jpeg");
+	
 		
 	}
 
