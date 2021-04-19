@@ -43,7 +43,6 @@ public class ClienteService {
 	private S3Service s3Service; 
 	
 	public Cliente find(Integer id) {
-		
 		UserSS user =  UserService.authenticated(); 
 		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado"); 
@@ -112,6 +111,16 @@ public class ClienteService {
 	}
 	
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
-		return s3Service.uploadFile(multipartFile); 
+		//Verificar se o usuario está logado. 
+		UserSS user =  UserService.authenticated(); 
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado"); 
+		}
+		
+		URI uri = s3Service.uploadFile(multipartFile); 
+		Cliente cli = repo.findById(user.getId()).get(); 
+		cli.setImageUrl(uri.toString());
+		repo.save(cli); 
+		return uri; 
 	}
 }
